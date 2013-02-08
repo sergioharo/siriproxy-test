@@ -39,7 +39,7 @@ class SiriProxy::Plugin::Test < SiriProxy::Plugin
   end
 
   def sayFromArray(array) 
-    thought = array.pop
+    thought = array.shift
     array.push thought
     say thought
   end
