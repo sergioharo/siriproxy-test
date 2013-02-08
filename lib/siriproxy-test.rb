@@ -12,30 +12,40 @@ require 'pp'
 
 class SiriProxy::Plugin::Test < SiriProxy::Plugin
   def initialize(config)
-    #if you have custom configuration options, process them here!
+    @sergioThoughts = ["He's awesome!"]
+    @julieThoughts = ["She's nice!"]
+    @christineThoughts = ["I don't like her."]
+    @otherThoughts = ["They're ok."]
+    @christineJokes = [
+      "Christine's face.", 
+      "Why did the chicken cross the road? It saw Christine's face.",
+      "Did you hear the one about Christine's face?"
+    ]
+  end
+
+  def sayFromArray(array) 
+    thought = array.pop
+    array.push thought
+
+    say thought
   end
 
   listen_for /what do you think of (.*)/i do |name|
     if name =~ /sergio/i then
-      say "He's awesome!"
+      sayFromArray @sergioThoughts
     elsif name =~ /julie/i then
-      say "She's nice!"
+      sayFromArray @julieThoughts
     elsif name =~ /christine/i then
-      say "I don't like her."
+      sayFromArray @otherThoughts
     else
-      say "They're ok."
+      sayFromArray @otherThoughts
     end
 
     request_completed 
   end
 
   listen_for /joke/i do
-    jokes = [
-      "Christine's face.", 
-      "Why did the chicken cross the road? It saw Christine's face.",
-      "Did you hear the one about Christine's face?"
-    ]
-
-    say jokes.sample
+    sayFromArray @christineJokes
+    request_completed
   end
 end
