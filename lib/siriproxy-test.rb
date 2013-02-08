@@ -26,7 +26,6 @@ class SiriProxy::Plugin::Test < SiriProxy::Plugin
   def sayFromArray(array) 
     thought = array.pop
     array.push thought
-
     say thought
   end
 
@@ -36,7 +35,7 @@ class SiriProxy::Plugin::Test < SiriProxy::Plugin
     elsif name =~ /julie/i then
       sayFromArray @julieThoughts
     elsif name =~ /christine/i then
-      sayFromArray @otherThoughts
+      sayFromArray @christineThoughts
     else
       sayFromArray @otherThoughts
     end
